@@ -2,14 +2,20 @@ import fs from 'fs';
 import { ITodoStore, ITodoDataExporter } from './store.types';
 import { ITodoDoc } from './indexer.types';
 
-export default class TextFileTodoStore implements ITodoStore {
-    constructor(private _filePath: string, private _fileSystem = fs) {}
+interface TFileSystem {
+    existsSync(filePath: string): boolean;
+    readFileSync(filePath: string, encoding: string): string;
+    writeFileSync(filePath: string, data: string, encoding: string): void;
+}
 
-    static FromFile(filePath: string): TextFileTodoStore {
+export default class TextFileTodoStore implements ITodoStore {
+    constructor(private _filePath: string, private _fileSystem: TFileSystem = fs) {}
+
+    static FromFile(filePath: string, _fileSystem: TFileSystem = fs): TextFileTodoStore {
         return new TextFileTodoStore(filePath, fs);
     }
 
-    static FileExists(file: string, _fileSystem = fs) {
+    static FileExists(file: string, _fileSystem: TFileSystem = fs) {
         return _fileSystem.existsSync(file);
     }
 
