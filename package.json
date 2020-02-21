@@ -25,7 +25,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "todo.txt-store",
+  "name": "@ochuzor/todo.txt-store",
   "author": "ochuzor",
   "module": "dist/todo.txt-store.esm.js",
   "devDependencies": {
