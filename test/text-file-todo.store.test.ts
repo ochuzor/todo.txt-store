@@ -47,14 +47,18 @@ describe('TextFileTodoStore', () => {
             });
 
             it('...with an empty string', () => {
-                expect(MockFs.writeFileSync).toHaveBeenCalledWith(fileName, '', 'utf8');
+                expect(MockFs.writeFileSync).toHaveBeenCalledWith(
+                    fileName,
+                    '',
+                    'utf8'
+                );
             });
         });
 
         describe('called with some data', () => {
             const data: ITodoDoc[] = [
-                {id: 1, text: 'write a test'},
-                {id: 2, text: 'write another test'},
+                { id: 1, text: 'write a test' },
+                { id: 2, text: 'write another test' },
             ];
             const expectedText: string = `${data[0].text}\n${data[1].text}`;
             let sut: TextFileTodoStore;
@@ -65,8 +69,11 @@ describe('TextFileTodoStore', () => {
             });
 
             it('should write the correct data', () => {
-                expect(MockFs.writeFileSync)
-                    .toHaveBeenCalledWith(fileName, expectedText, 'utf8');
+                expect(MockFs.writeFileSync).toHaveBeenCalledWith(
+                    fileName,
+                    expectedText,
+                    'utf8'
+                );
             });
         });
     });
@@ -96,12 +103,14 @@ describe('TextFileTodoStore', () => {
         describe('given a proper string input', () => {
             let result: ITodoDoc[];
             const expectedResult = [
-                {id: 0, text: 'first item'},
-                {id: 1, text: 'second item'},
+                { id: 0, text: 'first item' },
+                { id: 1, text: 'second item' },
             ];
             let sut: TextFileTodoStore;
             beforeEach(() => {
-                MockFs.readFileSync = jest.fn().mockReturnValue(' first item \n second item  \n ');
+                MockFs.readFileSync = jest
+                    .fn()
+                    .mockReturnValue(' first item \n second item  \n ');
                 sut = new TextFileTodoStore(fileName, MockFs);
                 result = sut.readData();
             });
@@ -118,8 +127,10 @@ describe('TextFileTodoStore', () => {
 
     describe('export()', () => {
         let sut: TextFileTodoStore;
-        const data = [{id: 1, text: 'some texts'}, 
-                {id: 2, text: 'other texts'}];
+        const data = [
+            { id: 1, text: 'some texts' },
+            { id: 2, text: 'other texts' },
+        ];
         const mockExporter = {
             export: jest.fn(),
         };

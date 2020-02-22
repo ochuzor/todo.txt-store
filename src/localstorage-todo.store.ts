@@ -17,8 +17,7 @@ export class LocalStorageTodoStore implements ITodoStore {
 
     readData(): ITodoDoc[] {
         const dataStr = this.storage.getItem(this.dataKey);
-        if (!dataStr || dataStr.trim() === '')
-            return [];
+        if (!dataStr || dataStr.trim() === '') return [];
         const data = JSON.parse(dataStr);
         if (!Array.isArray(data)) throw new Error('Invalid Data');
 

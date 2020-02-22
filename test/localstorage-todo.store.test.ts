@@ -1,4 +1,4 @@
-import {LocalStorageTodoStore} from '../src/localstorage-todo.store';
+import { LocalStorageTodoStore } from '../src/localstorage-todo.store';
 import { ITodoDoc } from '../src/indexer.types';
 
 describe('LocalStorageTodoStore', () => {
@@ -17,8 +17,10 @@ describe('LocalStorageTodoStore', () => {
             const fakeData: ITodoDoc[] = [];
             const sut = new LocalStorageTodoStore(fakeKey, mockStorage);
             sut.writeData(fakeData);
-            expect(mockStorage.setItem)
-                .toHaveBeenCalledWith(fakeKey, JSON.stringify(fakeData));
+            expect(mockStorage.setItem).toHaveBeenCalledWith(
+                fakeKey,
+                JSON.stringify(fakeData)
+            );
         });
     });
 
@@ -27,10 +29,10 @@ describe('LocalStorageTodoStore', () => {
             let result: ITodoDoc[];
             let sut: LocalStorageTodoStore;
             beforeEach(() => {
-                mockStorage.getItem.mockReturnValue("");
+                mockStorage.getItem.mockReturnValue('');
                 sut = new LocalStorageTodoStore(fakeKey, mockStorage);
                 result = sut.readData();
-            })
+            });
 
             it('should call store getItem', () => {
                 expect(mockStorage.getItem).toHaveBeenCalledWith(fakeKey);
@@ -38,12 +40,12 @@ describe('LocalStorageTodoStore', () => {
 
             it('...and it should return an empty array', () => {
                 expect(result).toEqual([]);
-            })
+            });
         });
 
         describe('called with invalid JSON string', () => {
             it('should throw an error', () => {
-                mockStorage.getItem.mockReturnValue("invlaid string");
+                mockStorage.getItem.mockReturnValue('invlaid string');
                 const sut = new LocalStorageTodoStore(fakeKey, mockStorage);
                 expect(() => sut.readData()).toThrow(SyntaxError);
             });
@@ -51,7 +53,7 @@ describe('LocalStorageTodoStore', () => {
 
         describe('called with non-array data', () => {
             it('should throw an error with invalid data error', () => {
-                mockStorage.getItem.mockReturnValue("{}");
+                mockStorage.getItem.mockReturnValue('{}');
                 const sut = new LocalStorageTodoStore(fakeKey, mockStorage);
                 expect(() => sut.readData()).toThrowError(/^Invalid Data$/);
             });
@@ -59,7 +61,7 @@ describe('LocalStorageTodoStore', () => {
 
         describe('called with valid EMPTY array of data', () => {
             it('should return an empty array', () => {
-                mockStorage.getItem.mockReturnValue("[]");
+                mockStorage.getItem.mockReturnValue('[]');
                 const sut = new LocalStorageTodoStore(fakeKey, mockStorage);
                 const result = sut.readData();
                 expect(result).toEqual([]);
@@ -69,8 +71,10 @@ describe('LocalStorageTodoStore', () => {
         describe('called with valid array of data', () => {
             let result: ITodoDoc[];
             let sut: LocalStorageTodoStore;
-            const data = [{id: 1, text: 'some texts'}, 
-                    {id: 2, text: 'other texts'}];
+            const data = [
+                { id: 1, text: 'some texts' },
+                { id: 2, text: 'other texts' },
+            ];
             beforeEach(() => {
                 mockStorage.getItem.mockReturnValue(JSON.stringify(data));
                 sut = new LocalStorageTodoStore(fakeKey, mockStorage);
@@ -88,8 +92,10 @@ describe('LocalStorageTodoStore', () => {
 
         describe('export()', () => {
             let sut: LocalStorageTodoStore;
-            const data = [{id: 1, text: 'some texts'}, 
-                    {id: 2, text: 'other texts'}];
+            const data = [
+                { id: 1, text: 'some texts' },
+                { id: 2, text: 'other texts' },
+            ];
             const mockExporter = {
                 export: jest.fn(),
             };
