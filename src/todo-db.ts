@@ -36,7 +36,7 @@ export class TodoDb<TIndexer extends ITodoIndexer, TStore extends ITodoStore>
     }
 
     export(exporter: ITodoDataExporter): void {
-        this._store.export(exporter);
+        exporter.export(this.readData());
     }
 
     protected saveAllAsync(): Promise<void> {
