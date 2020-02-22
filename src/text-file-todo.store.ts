@@ -27,7 +27,7 @@ export default class TextFileTodoStore implements ITodoStore {
     }
 
     writeData(data: ITodoDoc[]): void {
-        const _data = data.reduce((acc, doc) => `${acc} \n ${doc.text}`, '');
+        const _data = data.reduce((acc, doc) => `${acc.trim()}\n${doc.text}`, '');
         this._fileSystem.writeFileSync(this._filePath, _data, 'utf8');
     }
 
@@ -35,9 +35,9 @@ export default class TextFileTodoStore implements ITodoStore {
         const textData = this._fileSystem.readFileSync(this._filePath, 'utf8');
         return textData
             .split('\n')
-            .filter(ln => !!ln)
+            .filter(ln => !!ln.trim())
             .map((line, i) => {
-                return { id: i, text: line };
+                return { id: i, text: line.trim() };
             });
     }
 
