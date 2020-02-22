@@ -9,9 +9,15 @@ interface TFileSystem {
 }
 
 export default class TextFileTodoStore implements ITodoStore {
-    constructor(private _filePath: string, private _fileSystem: TFileSystem = fs) {}
+    constructor(
+        private _filePath: string,
+        private _fileSystem: TFileSystem = fs
+    ) {}
 
-    static FromFile(filePath: string, _fileSystem: TFileSystem = fs): TextFileTodoStore {
+    static FromFile(
+        filePath: string,
+        _fileSystem: TFileSystem = fs
+    ): TextFileTodoStore {
         return new TextFileTodoStore(filePath, fs);
     }
 
@@ -26,11 +32,12 @@ export default class TextFileTodoStore implements ITodoStore {
 
     readData(): ITodoDoc[] {
         const textData = this._fileSystem.readFileSync(this._filePath, 'utf8');
-        return (textData.split('\n')
+        return textData
+            .split('\n')
             .filter(ln => !!ln)
             .map((line, i) => {
-                return {id: 0, text: line};
-            }));
+                return { id: 0, text: line };
+            });
     }
 
     export(exporter: ITodoDataExporter): void {

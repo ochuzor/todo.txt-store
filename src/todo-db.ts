@@ -1,10 +1,9 @@
-import { ITodoIndexer, ITodoDoc, IdType } from "./indexer.types";
-import { ITodoStore, ITodoDataExporter } from "./store.types";
+import { ITodoIndexer, ITodoDoc, IdType } from './indexer.types';
+import { ITodoStore, ITodoDataExporter } from './store.types';
 
 export class TodoDb<TIndexer extends ITodoIndexer, TStore extends ITodoStore>
     implements ITodoIndexer, ITodoStore {
-
-    constructor(private _indexer: TIndexer, private _store: TStore) { }
+    constructor(private _indexer: TIndexer, private _store: TStore) {}
 
     addDoc(doc: ITodoDoc): void {
         this._indexer.addDoc(doc);
@@ -41,7 +40,7 @@ export class TodoDb<TIndexer extends ITodoIndexer, TStore extends ITodoStore>
     }
 
     protected saveAllAsync(): Promise<void> {
-        return new Promise((resolve) => {
+        return new Promise(resolve => {
             this.writeData(this.getAll());
             resolve();
         });
