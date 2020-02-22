@@ -15,7 +15,7 @@ export default class TextFileTodoStore implements ITodoStore {
         return new TextFileTodoStore(filePath, fs);
     }
 
-    static FileExists(file: string, _fileSystem: TFileSystem = fs) {
+    static FileExists(file: string, _fileSystem: TFileSystem = fs): boolean {
         return _fileSystem.existsSync(file);
     }
 
