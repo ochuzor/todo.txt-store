@@ -16,9 +16,13 @@ export class LocalStorageTodoStore implements ITodoStore {
     }
 
     readData(): ITodoDoc[] {
-        const data = this.storage.getItem(this.dataKey);
-        if (!data) return [];
-        return JSON.parse(data);
+        const dataStr = this.storage.getItem(this.dataKey);
+        if (!dataStr || dataStr.trim() === '')
+            return [];
+        const data = JSON.parse(dataStr);
+        if (!Array.isArray(data)) throw new Error('Invalid Data');
+
+        return data;
     }
 
     export(exporter: ITodoDataExporter): void {
