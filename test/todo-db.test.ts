@@ -1,4 +1,4 @@
-import {TodoDb} from '../src/todo-db';
+import { TodoDb } from '../src/todo-db';
 import { ITodoIndexer, ITodoDoc } from '../src/indexer.types';
 import { ITodoStore } from '../src/store.types';
 
@@ -26,7 +26,7 @@ describe('TodoDb', () => {
     });
 
     describe('addDoc:', () => {
-        const doc = {id: 1, text: 'something'};
+        const doc = { id: 1, text: 'something' };
 
         beforeEach(() => {
             sut.writeData = jest.fn();
@@ -39,7 +39,7 @@ describe('TodoDb', () => {
         });
 
         it('should call writeData', () => {
-            expect(sut.writeData).toBeCalledWith([])
+            expect(sut.writeData).toBeCalledWith([]);
         });
 
         it('should call getAll', () => {
@@ -49,7 +49,7 @@ describe('TodoDb', () => {
 
     describe('getDoc:', () => {
         const id = 1001;
-        const returnDoc = {id: 1, text: 'hello'};
+        const returnDoc = { id: 1, text: 'hello' };
         let result: any;
 
         beforeEach(() => {
@@ -80,7 +80,7 @@ describe('TodoDb', () => {
         });
 
         it('...and call writeData', () => {
-            expect(sut.writeData).toBeCalledWith([])
+            expect(sut.writeData).toBeCalledWith([]);
         });
 
         it('...and call getAll', () => {
