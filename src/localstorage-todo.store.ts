@@ -1,10 +1,14 @@
-import { ITodoStore, IStorage, ITodoDataExporter } from './store.types';
+import {
+    ITodoStore,
+    ILocalStorageBaseType,
+    ITodoDataExporter,
+} from './store.types';
 import { ITodoDoc } from './indexer.types';
 
 export class LocalStorageTodoStore implements ITodoStore {
     constructor(
         private dataKey: string,
-        private storage: IStorage = window.localStorage
+        private storage: ILocalStorageBaseType = window.localStorage
     ) {}
 
     writeData(data: ITodoDoc[]): void {

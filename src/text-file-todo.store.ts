@@ -1,27 +1,28 @@
 import fs from 'fs';
-import { ITodoStore, ITodoDataExporter } from './store.types';
+import {
+    ITodoStore,
+    ITodoDataExporter,
+    IFileSystemBaseType,
+} from './store.types';
 import { ITodoDoc } from './indexer.types';
-
-interface TFileSystem {
-    existsSync(filePath: string): boolean;
-    readFileSync(filePath: string, encoding: string): string;
-    writeFileSync(filePath: string, data: string, encoding: string): void;
-}
 
 export default class TextFileTodoStore implements ITodoStore {
     constructor(
         private _filePath: string,
-        private _fileSystem: TFileSystem = fs
+        private _fileSystem: IFileSystemBaseType = fs
     ) {}
 
     static FromFile(
         filePath: string,
-        _fileSystem: TFileSystem = fs
+        _fileSystem: IFileSystemBaseType = fs
     ): TextFileTodoStore {
         return new TextFileTodoStore(filePath, fs);
     }
 
-    static FileExists(file: string, _fileSystem: TFileSystem = fs): boolean {
+    static FileExists(
+        file: string,
+        _fileSystem: IFileSystemBaseType = fs
+    ): boolean {
         return _fileSystem.existsSync(file);
     }
 
@@ -36,7 +37,7 @@ export default class TextFileTodoStore implements ITodoStore {
             .split('\n')
             .filter(ln => !!ln)
             .map((line, i) => {
-                return { id: 0, text: line };
+                return { id: i, text: line };
             });
     }
 
