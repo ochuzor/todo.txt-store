@@ -43,8 +43,7 @@ export class UrlTodoStore implements ITodoStore {
 
     writeData(data: ITodoDoc[]): void {
         const json = JSON.stringify(data);
-        const encoded = b64EncodeUnicode(json);
-        this.locationObject.hash = encoded;
+        this.locationObject.hash = b64EncodeUnicode(json);
     }
 
     readData(): ITodoDoc[] {
