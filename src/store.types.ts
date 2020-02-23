@@ -20,3 +20,7 @@ export interface IFileSystemBaseType {
     readFileSync(filePath: string, encoding: string): string;
     writeFileSync(filePath: string, data: string, encoding: string): void;
 }
+
+export interface IWindowLocationObject {
+    hash: string;
+}
