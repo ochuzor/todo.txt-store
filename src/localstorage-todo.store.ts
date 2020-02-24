@@ -5,7 +5,7 @@ import {
 } from './store.types';
 import { ITodoDoc } from './indexer.types';
 import { ITodoListStringEncoder } from "./encoders/ITodoListStringEncoder.types";
-import { LZCompressedStringEncoder } from "encoders/lz-compressed-string-encoder";
+import { LZCompressedStringEncoder } from "./encoders/lz-compressed-string-encoder";
 
 export class LocalStorageTodoStore implements ITodoStore {
     constructor(
