@@ -1,4 +1,4 @@
-import { ITodoListStringEncoder } from ".";
+import { ITodoListStringEncoder } from "./ITodoListStringEncoder.types";
 import { ITodoDoc } from "../indexer.types";
 import {JsonEncoder} from "./json-encoder";
 
