@@ -1,6 +1,5 @@
 import { LocalStorageTodoStore } from '../src/localstorage-todo.store';
 import { ITodoDoc } from '../src/indexer.types';
-// import { ITodoListStringEncoder } from '../src/encoders/ITodoListStringEncoder.types';
 
 describe('LocalStorageTodoStore', () => {
     const fakeKey = 'fake-key';
@@ -9,7 +8,7 @@ describe('LocalStorageTodoStore', () => {
 
     beforeEach(() => {
         encoder = {
-            encoding: jest.fn(),
+            encode: jest.fn(),
             decode: jest.fn(),
         };
 
@@ -43,7 +42,7 @@ describe('LocalStorageTodoStore', () => {
         });
     });
 
-    describe('readData', () => {
+    describe('readData:', () => {
         describe('called with an empty data string', () => {
             let result: ITodoDoc[];
             let sut: LocalStorageTodoStore;
@@ -105,7 +104,7 @@ describe('LocalStorageTodoStore', () => {
         });
     });
 
-    describe('export()', () => {
+    describe('export:', () => {
         let sut: LocalStorageTodoStore;
         const data = [
             { id: 1, text: 'some texts' },
@@ -121,7 +120,7 @@ describe('LocalStorageTodoStore', () => {
             sut.export(mockExporter);
         });
 
-        it('should call exporter.export()', () => {
+        it('should call exporter.export', () => {
             expect(mockExporter.export).toBeCalledWith(data);
         });
     });

@@ -4,7 +4,7 @@ import {
     ITodoDataExporter,
     IWindowLocationObject,
 } from './store.types';
-import { B64Ecoder } from 'encoders/b64-encoder';
+import { B64Ecoder } from './encoders/b64-encoder';
 import { ITodoListStringEncoder } from './encoders';
 
 export class UrlTodoStore implements ITodoStore {
@@ -18,7 +18,9 @@ export class UrlTodoStore implements ITodoStore {
     }
 
     readData(): ITodoDoc[] {
-        const hash = this._locationObject.hash || '';
+        const hash = (this._locationObject.hash || '').trim();
+        if (hash === '') return [];
+
         const data = this._encoder.decode(hash.replace('#', ''));
         if (!Array.isArray(data)) throw new Error('Invalid Data');
 
