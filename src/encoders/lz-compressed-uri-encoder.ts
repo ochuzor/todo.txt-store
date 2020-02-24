@@ -1,7 +1,10 @@
-import { ITodoListStringEncoder } from ".";
-import { ITodoDoc } from "../indexer.types";
-import { JsonEncoder } from "./json-encoder";
-import {compressToEncodedURIComponent, decompressFromEncodedURIComponent} from "lz-string";
+import { ITodoListStringEncoder } from '.';
+import { ITodoDoc } from '../indexer.types';
+import { JsonEncoder } from './json-encoder';
+import {
+    compressToEncodedURIComponent,
+    decompressFromEncodedURIComponent,
+} from 'lz-string';
 
 export class LZCompressedUriEncoder implements ITodoListStringEncoder {
     constructor(private _encoder: ITodoListStringEncoder) {}

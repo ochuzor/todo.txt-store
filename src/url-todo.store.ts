@@ -5,7 +5,7 @@ import {
     IWindowLocationObject,
 } from './store.types';
 import { B64Ecoder } from 'encoders/b64-encoder';
-import { ITodoListStringEncoder } from "./encoders";
+import { ITodoListStringEncoder } from './encoders';
 
 export class UrlTodoStore implements ITodoStore {
     constructor(

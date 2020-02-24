@@ -1,4 +1,4 @@
-import { ITodoDoc } from "../indexer.types";
+import { ITodoDoc } from '../indexer.types';
 
 export interface ITodoListStringEncoder {
     encode(data: ITodoDoc[]): string;

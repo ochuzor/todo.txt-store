@@ -1,6 +1,6 @@
-import { ITodoListStringEncoder } from "./ITodoListStringEncoder.types";
-import { ITodoDoc } from "../indexer.types";
-import {JsonEncoder} from "./json-encoder";
+import { ITodoListStringEncoder } from './ITodoListStringEncoder.types';
+import { ITodoDoc } from '../indexer.types';
+import { JsonEncoder } from './json-encoder';
 
 // https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/Base64_encoding_and_decoding
 function b64EncodeUnicode(str: string) {

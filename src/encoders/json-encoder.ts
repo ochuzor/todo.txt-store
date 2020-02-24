@@ -1,5 +1,5 @@
-import { ITodoListStringEncoder } from "./ITodoListStringEncoder.types";
-import { ITodoDoc } from "../indexer.types";
+import { ITodoListStringEncoder } from './ITodoListStringEncoder.types';
+import { ITodoDoc } from '../indexer.types';
 
 export class JsonEncoder implements ITodoListStringEncoder {
     encode(data: ITodoDoc[]): string {

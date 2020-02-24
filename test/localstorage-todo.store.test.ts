@@ -65,7 +65,9 @@ describe('LocalStorageTodoStore', () => {
 
         describe('called with a non-empty data string', () => {
             const fakeItemVal = 'fake-item-valu';
-            const fakeDecodedValue: ITodoDoc[] = [{id: 1, text: 'x run some tests'}];
+            const fakeDecodedValue: ITodoDoc[] = [
+                { id: 1, text: 'x run some tests' },
+            ];
             let result: ITodoDoc[];
             let sut: LocalStorageTodoStore;
 
@@ -87,13 +89,17 @@ describe('LocalStorageTodoStore', () => {
 
         describe('if the data is not array', () => {
             it('should throw an invalid data error', () => {
-                const Sut = new LocalStorageTodoStore('fakeKey', {
-                    getItem: () => 'some long string',
-                    setItem: jest.fn(),
-                }, {
-                    encode: jest.fn(),
-                    decode: jest.fn().mockReturnValue('not an array'),
-                });
+                const Sut = new LocalStorageTodoStore(
+                    'fakeKey',
+                    {
+                        getItem: () => 'some long string',
+                        setItem: jest.fn(),
+                    },
+                    {
+                        encode: jest.fn(),
+                        decode: jest.fn().mockReturnValue('not an array'),
+                    }
+                );
                 expect(() => Sut.readData()).toThrowError(/^Invalid Data$/);
             });
         });
