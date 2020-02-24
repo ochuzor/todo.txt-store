@@ -3,7 +3,7 @@ import { ITodoDoc } from '../indexer.types';
 import { JsonEncoder } from './json-encoder';
 
 // https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/Base64_encoding_and_decoding
-function b64EncodeUnicode(str: string) {
+export function b64EncodeUnicode(str: string) {
     // first we use encodeURIComponent to get percent-encoded UTF-8,
     // then we convert the percent encodings into raw bytes which
     // can be fed into btoa.
@@ -19,7 +19,7 @@ function b64EncodeUnicode(str: string) {
 // b64EncodeUnicode('✓ à la mode'); // "4pyTIMOgIGxhIG1vZGU="
 // b64EncodeUnicode('\n'); // "Cg=="
 
-function b64DecodeUnicode(str: string) {
+export function b64DecodeUnicode(str: string) {
     // Going backwards: from bytestream, to percent-encoding, to original string.
     return decodeURIComponent(
         atob(str)
