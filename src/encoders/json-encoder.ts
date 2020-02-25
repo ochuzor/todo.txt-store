@@ -19,6 +19,10 @@ export class NoOpStringEncoder implements IStringEncoder {
 export class JsonEncoder implements ITodoListStringEncoder {
     constructor(private _parser: IJsonParser = JSON, 
         private _encoder: IStringEncoder = new NoOpStringEncoder()) {}
+    
+    static FromStringEcoder(stringEncoder: IStringEncoder): JsonEncoder {
+        return new JsonEncoder(JSON, stringEncoder);
+    }
 
     encode(data: ITodoDoc[]): string {
         return this._encoder.encode(
