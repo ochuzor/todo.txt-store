@@ -1,4 +1,4 @@
-import { ITodoListStringEncoder } from './ITodoListStringEncoder.types';
+import { ITodoListStringEncoder, IStringEncoder } from './ITodoListStringEncoder.types';
 import { ITodoDoc } from '../indexer.types';
 
 export interface IJsonParser {
@@ -6,14 +6,27 @@ export interface IJsonParser {
     parse: (value: string) => any;
 }
 
+export class NoOpStringEncoder implements IStringEncoder {
+    encode(data: string): string {
+        return data;
+    }
+    
+    decode(data: string): string {
+        return data;
+    }
+}
+
 export class JsonEncoder implements ITodoListStringEncoder {
-    constructor(private _parser: IJsonParser = JSON) {}
+    constructor(private _parser: IJsonParser = JSON, 
+        private _encoder: IStringEncoder = new NoOpStringEncoder()) {}
 
     encode(data: ITodoDoc[]): string {
-        return this._parser.stringify(data);
+        return this._encoder.encode(
+            this._parser.stringify(data));
     }
 
     decode(data: string): ITodoDoc[] {
-        return this._parser.parse(data);
+        return this._parser.parse(
+            this._encoder.decode(data));
     }
 }
