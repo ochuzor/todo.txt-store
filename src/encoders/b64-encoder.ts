@@ -1,6 +1,4 @@
-import { ITodoListStringEncoder } from './ITodoListStringEncoder.types';
-import { ITodoDoc } from '../indexer.types';
-import { JsonEncoder } from './json-encoder';
+import { IStringEncoder } from './ITodoListStringEncoder.types';
 
 // https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/Base64_encoding_and_decoding
 export function b64EncodeUnicode(str: string) {
@@ -33,18 +31,12 @@ export function b64DecodeUnicode(str: string) {
 // b64DecodeUnicode('4pyTIMOgIGxhIG1vZGU='); // "✓ à la mode"
 // b64DecodeUnicode('Cg=='); // "\n"
 
-export class B64Ecoder implements ITodoListStringEncoder {
-    protected constructor(private _encoder: ITodoListStringEncoder) {}
-
-    static FromJSON(): B64Ecoder {
-        return new B64Ecoder(new JsonEncoder());
+export class B64Ecoder implements IStringEncoder {
+    encode(text: string): string {
+        return b64EncodeUnicode(text);
     }
 
-    encode(data: ITodoDoc[]): string {
-        return b64EncodeUnicode(this._encoder.encode(data));
-    }
-
-    decode(data: string): ITodoDoc[] {
-        return this._encoder.decode(b64DecodeUnicode(data));
+    decode(text: string): string {
+        return b64DecodeUnicode(text);
     }
 }
