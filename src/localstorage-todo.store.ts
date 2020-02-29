@@ -5,13 +5,13 @@ import {
 } from './store.types';
 import { ITodoDoc } from './indexer.types';
 import { ITodoListStringEncoder } from './encoders/ITodoListStringEncoder.types';
-import { LZCompressedStringEncoder } from './encoders/lz-compressed-string-encoder';
+import { JsonEncoder } from './encoders/json-encoder';
 
 export class LocalStorageTodoStore implements ITodoStore {
     constructor(
         private dataKey: string,
         private storage: ILocalStorageBaseType = window.localStorage,
-        private _encoder: ITodoListStringEncoder = LZCompressedStringEncoder.FromJSON()
+        private _encoder: ITodoListStringEncoder = new JsonEncoder()
     ) {}
 
     writeData(data: ITodoDoc[]): void {
