@@ -11,7 +11,9 @@ import { B64Ecoder } from './encoders/b64-encoder';
 export class UrlTodoStore implements ITodoStore {
     constructor(
         private _locationObject: IWindowLocationObject = window.location,
-        private _encoder: ITodoListStringEncoder = JsonEncoder.FromStringEcoder(new B64Ecoder())
+        private _encoder: ITodoListStringEncoder = JsonEncoder.FromStringEcoder(
+            new B64Ecoder()
+        )
     ) {}
 
     writeData(data: ITodoDoc[]): void {

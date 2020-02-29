@@ -1,9 +1,14 @@
-import {b64EncodeUnicode, b64DecodeUnicode} from "../../src/encoders/b64-encoder";
+import {
+    b64EncodeUnicode,
+    b64DecodeUnicode,
+} from '../../src/encoders/b64-encoder';
 
 describe('b64-encoder:', () => {
     describe('b64EncodeUnicode:', () => {
         it('should encode unicode string', () => {
-            expect(b64EncodeUnicode('✓ à la mode')).toEqual('4pyTIMOgIGxhIG1vZGU=');
+            expect(b64EncodeUnicode('✓ à la mode')).toEqual(
+                '4pyTIMOgIGxhIG1vZGU='
+            );
         });
 
         it('should encode newline string', () => {
@@ -11,9 +16,11 @@ describe('b64-encoder:', () => {
         });
     });
 
-    describe('b64DecodeUnicode:',  () => {
+    describe('b64DecodeUnicode:', () => {
         it('should decode unicode string', () => {
-            expect(b64DecodeUnicode('4pyTIMOgIGxhIG1vZGU=')).toEqual('✓ à la mode');
+            expect(b64DecodeUnicode('4pyTIMOgIGxhIG1vZGU=')).toEqual(
+                '✓ à la mode'
+            );
         });
 
         it('should decode newline string', () => {

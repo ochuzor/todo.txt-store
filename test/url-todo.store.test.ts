@@ -1,4 +1,4 @@
-import {UrlTodoStore} from '../src/url-todo.store';
+import { UrlTodoStore } from '../src/url-todo.store';
 
 describe('UrlTodoStore:', () => {
     let locationObject: any;
@@ -18,7 +18,7 @@ describe('UrlTodoStore:', () => {
 
     describe('writeData:', () => {
         const data: any = [];
-        const encodedValue = 'AA-bb-CC'
+        const encodedValue = 'AA-bb-CC';
         beforeEach(() => {
             encoder.encode = jest.fn().mockReturnValue(encodedValue);
             sut.writeData(data);
@@ -43,18 +43,21 @@ describe('UrlTodoStore:', () => {
 
         describe('if decoded data is not array', () => {
             it('should throw an invalid data error', () => {
-                const Sut = new UrlTodoStore({
-                    hash: 'non-empty string'
-                }, {
-                    encode: jest.fn(),
-                    decode: jest.fn().mockReturnValue('not an array'),
-                });
+                const Sut = new UrlTodoStore(
+                    {
+                        hash: 'non-empty string',
+                    },
+                    {
+                        encode: jest.fn(),
+                        decode: jest.fn().mockReturnValue('not an array'),
+                    }
+                );
                 expect(() => Sut.readData()).toThrowError(/^Invalid Data$/);
             });
         });
 
         describe('when data is valid', () => {
-            const mockTodoList = [{id: 200, text: '(B) add some more tests'}];
+            const mockTodoList = [{ id: 200, text: '(B) add some more tests' }];
             const hashVal = 'hash-value';
             let result: any;
             beforeEach(() => {
